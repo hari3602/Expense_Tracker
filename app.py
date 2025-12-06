@@ -1,17 +1,29 @@
 class Expense_track:
+    
+    def __init__(self):
+        self.expense = {}
 
     def add_expense(self):
-        pass
+        category = str(input("For what thing do you spend for:")).strip()
+        amount = int(input("how much you spend: "))
+        if category not in self.expense:
+            self.expense[category] = amount
+        else:
+            self.expense[category] += amount
+
     
     def list_expense(self):
-        pass
+        print(self.expense)
 
     def total_expense(self):
-        pass
+        money = self.expense.values()
+        money = list(money)
+        total = sum(money)
+        print(total)
     
     def run(self):
         while True:
-            choice = str(input("What do you wanna do (add, list, total, exit)")).strip().lower()
+            choice = str(input("What do you wanna do (add, list, total, exit)\n\t")).strip().lower()
             if choice == "add":
                 self.add_expense()
             elif choice == "list":
