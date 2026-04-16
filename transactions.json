@@ -1,0 +1,20 @@
+[
+    {
+        "date": "2026-04-16",
+        "type": "income",
+        "category": "job",
+        "amount": 1250.0
+    },
+    {
+        "date": "2026-04-16",
+        "type": "expense",
+        "category": "",
+        "amount": 100.0
+    },
+    {
+        "date": "2026-04-16",
+        "type": "income",
+        "category": "passive",
+        "amount": 500.0
+    }
+]
