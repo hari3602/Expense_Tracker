@@ -12,7 +12,7 @@ class Finance_tracker:
         category = str(input("Enter the category of the transaction: ")).strip()
         amount = float(input("Enter the amount of the transaction: "))
         self.transactions.append({"date": date, "type": type, "category": category, "amount": amount})
-        with open("transactions.json", "w") as file:
+        with open("transactions.jsonwha", "w") as file:
             json.dump(self.transactions, file, indent=4)
     
     def list_transactions(self):
