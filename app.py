@@ -23,15 +23,22 @@ class FinanceTracker:
             return
         
         self.service.add_transaction(date, t_type, category, amount)
-        self.storage.save(self.service.transactions)
+
+    def delete_cli(self):
+        try:
+            txn_index = int(input("Index of transaction: "))
+        except ValueError:
+            print("Invalid index")
+            return
+        self.service.delete_transaction(txn_index)
 
     def list_cli(self):
         data = self.service.list_transactions()
-        print("Date \t Transction type \t Category \t Amount \n")
+        print("Index \t Date \t Transction type \t Category \t Amount \n")
         print("-"*60)
-        for txn in data:
+        for index, txn in enumerate(data, start=1):
             sign = "+" if txn.type == "income" else "-"
-            print(f"{txn.date}\t{txn.type}\t{txn.category}\t{sign}{txn.amount}")
+            print(f"{index}\t{txn.date}\t{txn.type}\t{txn.category}\t{sign}{txn.amount}")
 
     def total_cli(self):
         total = self.service.total_transactions()
@@ -39,9 +46,11 @@ class FinanceTracker:
 
     def run_cli(self):
         while True:
-            choice = str(input("What do you wanna do (add, list, total, exit)\n\t")).strip().lower()
+            choice = str(input("What do you wanna do (add, delete, list, total, exit)\n\t")).strip().lower()
             if choice == "add":
                 self.add_cli()
+            elif choice == "delete":
+                self.delete_cli()
             elif choice == "list":
                 self.list_cli()
             elif choice == "total":
