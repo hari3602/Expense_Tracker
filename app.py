@@ -33,12 +33,26 @@ class FinanceTracker:
         self.service.delete_transaction(txn_index)
 
     def list_cli(self):
-        data = self.service.list_transactions()
-        print("Index \t Date \t Transction type \t Category \t Amount \n")
-        print("-"*60)
-        for index, txn in enumerate(data, start=1):
-            sign = "+" if txn.type == "income" else "-"
-            print(f"{index}\t{txn.date}\t{txn.type}\t{txn.category}\t{sign}{txn.amount}")
+        list_filter = input("List of (Income/Expense/all):").strip().lower()
+        if list_filter == "all":
+            data = self.service.list_transactions()
+            print("Index \t Date \t Transction type \t Category \t Amount \n")
+            print("-"*60)
+            for index, txn in enumerate(data, start=1):
+                sign = "+" if txn.type == "income" else "-"
+                print(f"{index}\t{txn.date}\t{txn.type}\t{txn.category}\t{sign}{txn.amount}")
+        elif list_filter == "income" or "expense":
+            data = self.service.list_transaction_by_type(list_filter)
+            print("Index \t Date \t Transction type \t Category \t Amount \n")
+            print("-"*60)
+            for txn in data:
+                sign = "+" if txn[1].type == "income" else "-"
+                print(f"{txn[0]}\t{txn[1].date}\t{txn[1].type}\t{txn[1].category}\t{sign}{txn[1].amount}")
+
+        elif list_filter == "expense":
+            pass
+        else:
+            print("Enter valid input")
 
     def total_cli(self):
         total = self.service.total_transactions()

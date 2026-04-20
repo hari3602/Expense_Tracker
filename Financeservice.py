@@ -22,6 +22,10 @@ class FinanceService:
     def list_transactions(self):
         return(self.transactions)
     
+    def list_transaction_by_type(self,t_type):
+        return [(i+1, self.transactions[i]) for i in range(len(self.transactions)) if self.transactions[i].type==t_type]
+
+    
     def total_transactions(self):
         total_income = sum(transaction.amount for transaction in self.transactions if transaction.type == 'income')
         total_expense = sum(transaction.amount for transaction in self.transactions if transaction.type == 'expense')
