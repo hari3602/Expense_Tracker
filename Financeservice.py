@@ -1,5 +1,6 @@
 from Transaction import Transaction
 from storage import Storage
+from datetime import datetime
 
 class FinanceService:
     def __init__(self):
@@ -26,3 +27,17 @@ class FinanceService:
         total_income = sum(transaction.amount for transaction in self.transactions if transaction.type == 'income')
         total_expense = sum(transaction.amount for transaction in self.transactions if transaction.type == 'expense')
         return {'income': total_income,'expense': total_expense,'balance':total_income - total_expense}
+    
+    def monthly_summary(self):
+        monthly_summary ={}
+        for transaction in self.transactions:
+            date_obj = datetime.strptime(transaction.date, "%d/%m/%Y")
+            month_key = date_obj.strftime("%m/%Y")
+            if month_key not in monthly_summary:
+                monthly_summary[month_key] = {"income": 0, "expense": 0, "balance":0}
+            if transaction.type == "income":
+                monthly_summary[month_key]["income"] += transaction.amount
+            elif transaction.type == "expense":
+                monthly_summary[month_key]["expense"] += transaction.amount
+            monthly_summary[month_key]["balance"] = monthly_summary[month_key]["income"]-monthly_summary[month_key]["expense"]
+        return monthly_summary

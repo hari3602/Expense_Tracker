@@ -41,8 +41,16 @@ class FinanceTracker:
             print(f"{index}\t{txn.date}\t{txn.type}\t{txn.category}\t{sign}{txn.amount}")
 
     def total_cli(self):
-        total = self.service.total_transactions()
-        print(f"Income: {total['income']} \n Expense: {total['expense']} \n Balance: {total['balance']}")
+        summary = input("summary of (all/monthly): ").strip().lower()
+        if summary == "all":
+            total = self.service.total_transactions()
+            print(f"Income: {total['income']} \n Expense: {total['expense']} \n Balance: {total['balance']}")
+        elif summary == "monthly":
+            total = self.service.monthly_summary()
+            for month,data in total.items():
+                print(month)
+                print(f"\t\t Income: {data['income']} \n\t\t Expense: {data['expense']} \n\t\t Balance: {data['balance']}")
+
 
     def run_cli(self):
         while True:
