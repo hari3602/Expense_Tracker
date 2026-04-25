@@ -48,7 +48,7 @@ class FinanceTracker:
         elif summary == "category":
             total = self.service.category_summary()
             for category in total:
-                print(f"{category}: {total[category]}")
+                print(f"{category}: Income: {total[category]['income']}, Expense: {total[category]['expense']}, Balance: {total[category]['income'] - total[category]['expense']}")
 
     def run_cli(self):
         while True:

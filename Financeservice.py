@@ -29,16 +29,17 @@ class FinanceService:
     
     def category_summary(self):
         # category = list({txn.category for txn in self.transactions})
-        catergory_total = {}
+        category_total = {}
         for txn in self.transactions:
-            if txn.category in catergory_total:
+            if txn.category in category_total:
                 if txn.type == "income":
-                    catergory_total[txn.category] += txn.amount
+                    category_total[txn.category]["income"] += txn.amount
                 elif txn.type == "expense":
-                    catergory_total[txn.category] -= txn.amount
+                    category_total[txn.category]["expense"] += txn.amount
             else:
+                category_total[txn.category] = {"income": 0, "expense": 0}
                 if txn.type == "income":
-                    catergory_total[txn.category] = txn.amount
+                    category_total[txn.category]["income"] = txn.amount
                 elif txn.type == "expense":
-                    catergory_total[txn.category] = -txn.amount
-        return catergory_total
+                    category_total[txn.category]["expense"] = txn.amount
+        return category_total
