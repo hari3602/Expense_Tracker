@@ -62,7 +62,7 @@ class FinanceTracker:
             print("Enter valid input")
 
     def total_cli(self):
-        summary = input("summary of (all/category): ").strip().lower()
+        summary = input("summary of (all/category/monthly): ").strip().lower()
         if summary == "all":
             total = self.service.total_transactions()
             print(f"Income: {total['income']} \n Expense: {total['expense']} \n Balance: {total['balance']}")
@@ -70,6 +70,11 @@ class FinanceTracker:
             total = self.service.category_summary()
             for category in total:
                 print(f"{category}: Income: {total[category]['income']}, Expense: {total[category]['expense']}, Balance: {total[category]['income'] - total[category]['expense']}")
+        elif summary == "monthly":
+            total = self.service.monthly_summary()
+            for month,data in total.items():
+                print(month)
+                print(f"\t\t Income: {data['income']} \n\t\t Expense: {data['expense']} \n\t\t Balance: {data['balance']}")
 
     def run_cli(self):
         while True:
