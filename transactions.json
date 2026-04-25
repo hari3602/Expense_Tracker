@@ -1,26 +1,44 @@
 [
     {
-        "date": "33/43/4343",
+        "date": "30/03/2026",
         "type": "expense",
         "category": "food",
         "amount": 434
     },
     {
-        "date": "32/23/2322",
+        "date": "03/03/2026",
         "type": "income",
         "category": "job",
         "amount": 45343
     },
     {
-        "date": "33/34/4343",
+        "date": "13/03/2026",
         "type": "income",
         "category": "extra",
         "amount": 44434
     },
     {
-        "date": "43/34/4343",
+        "date": "21/04/2026",
         "type": "expense",
         "category": "shoping",
         "amount": 343
+    },
+    {
+        "date": "22/04/2026",
+        "type": "expense",
+        "category": "food",
+        "amount": 50
+    },
+    {
+        "date": "9/5/2026",
+        "type": "income",
+        "category": "rent",
+        "amount": 3000
+    },
+    {
+        "date": "2/05/2026",
+        "type": "expense",
+        "category": "rent",
+        "amount": 777
     }
 ]

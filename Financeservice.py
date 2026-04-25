@@ -30,3 +30,20 @@ class FinanceService:
         total_income = sum(transaction.amount for transaction in self.transactions if transaction.type == 'income')
         total_expense = sum(transaction.amount for transaction in self.transactions if transaction.type == 'expense')
         return {'income': total_income,'expense': total_expense,'balance':total_income - total_expense}
+    
+    def category_summary(self):
+        # category = list({txn.category for txn in self.transactions})
+        category_total = {}
+        for txn in self.transactions:
+            if txn.category in category_total:
+                if txn.type == "income":
+                    category_total[txn.category]["income"] += txn.amount
+                elif txn.type == "expense":
+                    category_total[txn.category]["expense"] += txn.amount
+            else:
+                category_total[txn.category] = {"income": 0, "expense": 0}
+                if txn.type == "income":
+                    category_total[txn.category]["income"] = txn.amount
+                elif txn.type == "expense":
+                    category_total[txn.category]["expense"] = txn.amount
+        return category_total
